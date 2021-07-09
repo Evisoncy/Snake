@@ -2,12 +2,12 @@ from pygame.locals import *
 from juego import *
 from jugador import *
 from manzana import *
-from computadora import *
+from computadora_e import *
 from random import lognormvariate, randint
 import pygame
 import time
 
-class aplicacion:
+class aplication_e:
  
     windowWidth = 800
     windowHeight = 600
@@ -23,7 +23,7 @@ class aplicacion:
         self.juego = juego()
         self.jugador = jugador(3) 
         self.manzana = manzana(5,5)
-        self.computadora = computadora(1)
+        self.computadora_e = computadora_e(1)
  
     def on_init(self):
         pygame.init()
@@ -40,7 +40,7 @@ class aplicacion:
  
     def on_loop(self):
         self.jugador.update()
-        self.computadora.update()
+        self.computadora_e.update()
      
  
         # ¿la serpiente puede comer la manzana?
@@ -50,11 +50,11 @@ class aplicacion:
                 self.manzana.y = randint(2,9) * 44
                 self.jugador.longitud = self.jugador.longitud + 1
 
-        for i in range(0,self.computadora.longitud):
-            if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora.x[i], self.computadora.y[i],44):
-                self.manzana.x = randint(2,9) * 44
-                self.manzana.y = randint(2,9) * 44
-                self.computadora.longitud = self.computadora.longitud + 1        
+        #for i in range(0,self.computadora_e.longitud):
+         #   if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_e.x[i], self.computadora_e.y[i],44):
+          #      self.manzana.x = randint(2,9) * 44
+           #     self.manzana.y = randint(2,9) * 44
+            #    self.computadora_e.longitud = self.computadora_e.longitud + 1        
                 
  
  
@@ -65,12 +65,12 @@ class aplicacion:
                 print("x[0] (" + str(self.jugador.x[0]) + "," + str(self.jugador.y[0]) + ")")
                 print("x[" + str(i) + "] (" + str(self.jugador.x[i]) + "," + str(self.jugador.y[i]) + ")")
                 exit(0)
-        for i in range(2,self.computadora.longitud):
-            if self.juego.isCollision(self.computadora.x[0],self.computadora.y[0],self.computadora.x[i], self.computadora.y[i],40):
-                print("Perdiste! chocaste: ")
-                print("x[0] (" + str(self.computadora.x[0]) + "," + str(self.computadora.y[0]) + ")")
-                print("x[" + str(i) + "] (" + str(self.computadora.x[i]) + "," + str(self.computadora.y[i]) + ")")
-                exit(0)
+        #for i in range(2,self.computadora_e.longitud):
+        #    if self.juego.isCollision(self.computadora_e.x[0],self.computadora_e.y[0],self.computadora_e.x[i], self.computadora_e.y[i],40):
+         #       print("Perdiste! chocaste: ")
+          #      print("x[0] (" + str(self.computadora_e.x[0]) + "," + str(self.computadora_e.y[0]) + ")")
+           #     print("x[" + str(i) + "] (" + str(self.computadora_e.x[i]) + "," + str(self.computadora_e.y[i]) + ")")
+            #    exit(0)
  
         pass
         
@@ -80,7 +80,7 @@ class aplicacion:
         self._display_surf.fill((0,0,0))
         self.jugador.draw(self._display_surf, self._image_surf)
         self.manzana.draw(self._display_surf, self._manzana_surf)
-        self.computadora.draw(self._display_surf,self._image_surf)
+        self.computadora_e.draw(self._display_surf,self._image_surf)
         pygame.display.flip()
  
     def on_cleanup(self):
@@ -94,7 +94,17 @@ class aplicacion:
             pygame.event.pump()
             keys = pygame.key.get_pressed() 
 
-            self.computadora.target(self.manzana.x, self.manzana.y)
+            if (keys[K_KP_3]):
+                 self.computadora_e.moveRight()
+
+            if (keys[K_KP_1]):
+                self.computadora_e.moveLeft()
+
+            if (keys[K_KP_5]):
+                self.computadora_e.moveUp()
+                
+            if (keys[K_KP_2]):
+                self.computadora_e.moveDown()
 
             if (keys[K_RIGHT]):
                 self.jugador.moveRight()
@@ -115,5 +125,7 @@ class aplicacion:
             self.on_render()
             
  
-            time.sleep (100.0 / 500.0);
+            time.sleep (100.0 / 500.0)
+            #self.jugador.time.sleep(50.0 / 500.0)
+
         self.on_cleanup()

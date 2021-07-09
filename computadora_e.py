@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-class computadora:
+class computadora_e:
     x = [0]
     y = [0]
     pasos = 44
@@ -36,8 +36,6 @@ class computadora:
             if self.y[0] > dy:
                 self.moveUp()
 
-    
-  
 
     def update(self):
  

@@ -1,25 +1,36 @@
+from aplication_i import aplicacion_i
 from aplicacion import *
 from tkinter import *
+from aplication_e import *
+from aplication_i import *
 
 # Recuerda tener todos los archivos en una misma carpeta
 # para que los imports no tengan problemas.
 if __name__ == '__main__':
     aplicacion = aplicacion ()
-   
+    aplication_e = aplication_e ()
+    aplicacion_i = aplicacion_i ()
     raiz=Tk()
     raiz.title("SNAKE")
     raiz.resizable(0,0)
     raiz.config(bg="black")
-    ventana = Frame(raiz,height=300, width=300)
+    ventana = Frame(raiz,height=550, width=300)
     ventana.config(bg="black")
     ventana.pack()
     img=PhotoImage(file="snake.png")
     imagen = Label(ventana, image=img)
     imagen.place(x=47,y=22)
+    vsPC = Label(ventana, text="VS : PC", font=("Verdana",12), bg="black", fg="white").place(x=115,y=300)
 
     #funciones de los botones
     def iniciar():
         aplicacion.on_execute()
+
+    def vsJ2():
+        aplication_e.on_execute()
+
+    def facil():
+        aplicacion_i.on_execute()      
 
     def reglas():
         raiz = Tk()
@@ -39,9 +50,11 @@ if __name__ == '__main__':
         raiz.mainloop()
 
     #botones del menu principal
-    botonIniciar = Button(ventana, text="J1 vs J2", font=("Verdana",8),command=iniciar).place(x=15,y=250)
-    botonIniciarvsC = Button(ventana, text="J1 vs Computadora", font=("Verdana",8)).place(x=90,y=250)
-    botonReglas = Button(ventana, text="Reglas", font=("Verdana",8),command=reglas).place(x=230,y=250)
+    botonIniciar = Button(ventana, text="J1 vs J2", font=("Verdana",10),command=vsJ2).place(x=120,y=250)
+    botonIniciarvsCF = Button(ventana, text="FACIL", font=("Verdana",10),command=facil).place(x=120,y=350)
+    botonIniciarvsCM = Button(ventana, text="MEDIO", font=("Verdana",10)).place(x=120,y=400)
+    botonIniciarvsCD = Button(ventana, text="DIFICiL", font=("Verdana",10),command=iniciar).place(x=119,y=450)
+    botonReglas = Button(ventana, text="Reglas", font=("Verdana",10),command=reglas).place(x=120,y=500)
 #   botonIniciar = Button(ventana, text="Iniciar", font=("Verdana",11),command=iniciar).place(x=26,y=31)
 
 

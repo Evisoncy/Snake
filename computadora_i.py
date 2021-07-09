@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 
-class computadora:
+class computadora_i:
     x = [0]
     y = [0]
     pasos = 44
@@ -24,17 +24,17 @@ class computadora:
   
     def target(self, dx, dy):
         if self.x[0] > dx:
-            self.moveLeft()
+            self.moveRight()
     
         if self.x[0] < dx:
-            self.moveRight()
+            self.moveLeft()
     
         if self.x[0] == dx:
             if self.y[0] < dy:
-                self.moveDown()
+                self.moveUp()
     
             if self.y[0] > dy:
-                self.moveUp()
+                self.moveDown()
 
     
   
