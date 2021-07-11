@@ -1,25 +1,24 @@
 import pygame
 from pygame.locals import *
+import time
 
 class computadora_e:
     x = [0]
     y = [0]
     pasos = 44
     direccion = 0
-    longitud = 3
- 
-    updateCuentaMaxima = 2
-    updateCuenta = 0
-
-    
+    longitud = 1 
+  
     def __init__(self, longitud):
+       self.direction = "Derecha"
+       self.changueDirectionTo = self.direction
        self.longitud = longitud
        for i in range(0,2000):
            self.x.append(-100)
            self.y.append(-100)
  
        # posición inicial, no choque.
-       self.x[0] = 1*44
+       self.x[0] = 1*44 
        self.y[0] = 4*44
   
     def target(self, dx, dy):
@@ -38,26 +37,23 @@ class computadora_e:
 
 
     def update(self):
+        # carga posición previa
+        for i in range(self.longitud-1,0,-1):
+            self.x[i] = self.x[i-1]
+            self.y[i] = self.y[i-1]
+
+        # actualiza la posición de la cabeza de la serpiente
+        if self.direccion == 0:
+            self.x[0] = self.x[0] + self.pasos
+        if self.direccion == 1:
+            self.x[0] = self.x[0] - self.pasos
+        if self.direccion == 2:
+            self.y[0] = self.y[0] - self.pasos
+        if self.direccion == 3:
+            self.y[0] = self.y[0] + self.pasos
  
-        self.updateCuenta = self.updateCuenta + 1
-        if self.updateCuenta and self.updateCuentaMaxima:
- 
-            # carga posición previa
-            for i in range(self.longitud-1,0,-1):
-                self.x[i] = self.x[i-1]
-                self.y[i] = self.y[i-1]
- 
-            # actualiza la posición de la cabeza de la serpiente
-            if self.direccion == 0:
-                self.x[0] = self.x[0] + self.pasos
-            if self.direccion == 1:
-                self.x[0] = self.x[0] - self.pasos
-            if self.direccion == 2:
-                self.y[0] = self.y[0] - self.pasos
-            if self.direccion == 3:
-                self.y[0] = self.y[0] + self.pasos
- 
-            self.updateCuenta = 0
+            
+           # time.sleep(100.0 / 500.0)
  
  
     def moveRight(self):

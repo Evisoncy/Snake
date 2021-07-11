@@ -1,16 +1,13 @@
 import pygame
 from pygame.locals import *
 
-class computadora:
+class jugador_2:
     x = [0]
     y = [0]
     pasos = 44
     direccion = 0
-    longitud = 3
- 
-    updateCuentaMaxima = 2
-    updateCuenta = 0
-
+    longitud = 1
+  
     
     def __init__(self, longitud):
        self.longitud = longitud
@@ -21,28 +18,9 @@ class computadora:
        # posición inicial, no choque.
        self.x[0] = 1*44
        self.y[0] = 4*44
-  
-    def target(self, dx, dy):
-        if self.x[0] > dx:
-            self.moveLeft()
-    
-        if self.x[0] < dx:
-            self.moveRight()
-    
-        if self.x[0] == dx:
-            if self.y[0] < dy:
-                self.moveDown()
-    
-            if self.y[0] > dy:
-                self.moveUp()
-
-    
-  
+   
 
     def update(self):
- 
-        self.updateCuenta = self.updateCuenta + 1
-        if self.updateCuenta and self.updateCuentaMaxima:
  
             # carga posición previa
             for i in range(self.longitud-1,0,-1):
@@ -58,9 +36,6 @@ class computadora:
                 self.y[0] = self.y[0] - self.pasos
             if self.direccion == 3:
                 self.y[0] = self.y[0] + self.pasos
- 
-            self.updateCuenta = 0
- 
  
     def moveRight(self):
         self.direccion = 0

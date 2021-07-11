@@ -6,10 +6,7 @@ class computadora_i:
     y = [0]
     pasos = 44
     direccion = 0
-    longitud = 3
- 
-    updateCuentaMaxima = 2
-    updateCuenta = 0
+    longitud = 1
 
     
     def __init__(self, longitud):
@@ -24,25 +21,23 @@ class computadora_i:
   
     def target(self, dx, dy):
         if self.x[0] > dx:
-            self.moveRight()
+            self.moveLeft()
     
         if self.x[0] < dx:
-            self.moveLeft()
+            self.moveRight()
     
         if self.x[0] == dx:
             if self.y[0] < dy:
-                self.moveUp()
+                self.moveDown()
     
             if self.y[0] > dy:
-                self.moveDown()
+                self.moveUp()
 
     
   
 
     def update(self):
  
-        self.updateCuenta = self.updateCuenta + 1
-        if self.updateCuenta and self.updateCuentaMaxima:
  
             # carga posición previa
             for i in range(self.longitud-1,0,-1):
@@ -59,7 +54,7 @@ class computadora_i:
             if self.direccion == 3:
                 self.y[0] = self.y[0] + self.pasos
  
-            self.updateCuenta = 0
+           
  
  
     def moveRight(self):

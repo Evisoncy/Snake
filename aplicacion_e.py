@@ -3,18 +3,18 @@ from pygame.locals import *
 from juego import *
 from jugador import *
 from manzana import *
-from computadora_p import *
+from computadora_e import *
 from random import lognormvariate, randint
 import pygame
 import time
 
-class aplicacion_p:
+class aplicacion_e:
  
     windowWidth = 1200
     windowHeight = 650
-    jugador_p = 0
+    jugador = 0
     manzana = 0
-    computadora_p = 0
+    computadora = 0
  
     def __init__(self):
         self._running = True
@@ -23,9 +23,9 @@ class aplicacion_p:
         self._image_surf = None
         self._manzana_surf = None
         self.juego = juego()
-        self.jugador_p = jugador_p(1) 
+        self.jugador_e = jugador_e(1) 
         self.manzana = manzana(14,14)
-        self.computadora_p = computadora_p(1)
+        self.computadora_e = computadora_e(1)
  
     def on_init(self):
         pygame.init()
@@ -43,35 +43,35 @@ class aplicacion_p:
  
     def on_loop(self):
         keys = pygame.key.get_pressed() 
-        self.jugador_p.update()
-        self.computadora_p.update()
+        self.jugador_e.update()
+        self.computadora_e.update()
         
      
  
         # ¿la serpiente puede comer la manzana?
-        for i in range(0,self.jugador_p.longitud):
-            if self.juego.isCollision(self.manzana.x,self.manzana.y,self.jugador_p.x[i], self.jugador_p.y[i]):
+        for i in range(0,self.jugador_e.longitud):
+            if self.juego.isCollision(self.manzana.x,self.manzana.y,self.jugador_e.x[i], self.jugador_e.y[i]):
                 self.manzana.x = randint(2,14) * 44
                 self.manzana.y = randint(2,14) * 44
-                self.jugador_p.longitud = self.jugador_p.longitud + 1
+                self.jugador_e.longitud = self.jugador_e.longitud + 1
                 
 
-        for i in range(0,self.computadora_p.longitud):
-           if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_p.x[i], self.computadora_p.y[i]):
+        for i in range(0,self.computadora_e.longitud):
+           if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_e.x[i], self.computadora_e.y[i]):
               self.manzana.x = randint(2,14) * 44
               self.manzana.y = randint(2,14) * 44
-              self.computadora_p.longitud = self.computadora_p.longitud + 1   
+              self.computadora_e.longitud = self.computadora_e.longitud + 1   
                   
                 
  
-        pygame.display.set_caption(" HUMANO SCORE: " + str(self.jugador_p.longitud-1) + "     " + " COMPUTADORA SCORE: " + str(self.computadora_p.longitud-1))
+        pygame.display.set_caption(" HUMANO SCORE: " + str(self.jugador_e.longitud-1) + "     " + " COMPUTADORA SCORE: " + str(self.computadora_e.longitud-1))
         
-        if self.jugador_p.longitud == 16:
+        if self.jugador_e.longitud == 16:
             pygame.display.set_caption("\n\n\n\n GANO EL HUMANO" )
             time.sleep(10)
             pygame.quit()
         else:
-            if self.computadora_p.longitud == 16:
+            if self.computadora_e.longitud == 16:
                 pygame.display.set_caption("\n\n\n\n GANO LA COMPUTADORA" )
                 time.sleep(10)
                 pygame.quit()
@@ -84,11 +84,11 @@ class aplicacion_p:
             #    print("x[0] (" + str(self.jugador.x[0]) + "," + str(self.jugador.y[0]) + ")")
            #     print("x[" + str(i) + "] (" + str(self.jugador.x[i]) + "," + str(self.jugador.y[i]) + ")")
              #   exit(0)
-        #for i in range(2,self.computadora_p.longitud):
-        #    if self.juego.isCollision(self.computadora_p.x[0],self.computadora_p.y[0],self.computadora_p.x[i], self.computadora_p.y[i],40):
+        #for i in range(2,self.computadora_e.longitud):
+        #    if self.juego.isCollision(self.computadora_e.x[0],self.computadora_e.y[0],self.computadora_e.x[i], self.computadora_e.y[i],40):
          #       print("Perdiste! chocaste: ")
-          #      print("x[0] (" + str(self.computadora_p.x[0]) + "," + str(self.computadora_p.y[0]) + ")")
-           #     print("x[" + str(i) + "] (" + str(self.computadora_p.x[i]) + "," + str(self.computadora_p.y[i]) + ")")
+          #      print("x[0] (" + str(self.computadora_e.x[0]) + "," + str(self.computadora_e.y[0]) + ")")
+           #     print("x[" + str(i) + "] (" + str(self.computadora_e.x[i]) + "," + str(self.computadora_e.y[i]) + ")")
             #    exit(0)
  
         pass
@@ -97,9 +97,9 @@ class aplicacion_p:
  
     def on_render(self):
         self._display_surf.fill((0,0,0))
-        self.jugador_p.draw(self._display_surf, self._imageh_surf)
+        self.computadora_e.draw(self._display_surf,self._image_surf)
+        self.jugador_e.draw(self._display_surf, self._imageh_surf)
         self.manzana.draw(self._display_surf, self._manzana_surf)
-        self.computadora_p.draw(self._display_surf,self._image_surf)
         pygame.display.flip()
  
     def on_cleanup(self):
@@ -113,20 +113,20 @@ class aplicacion_p:
             pygame.event.pump()
             keys = pygame.key.get_pressed() 
 
-            self.computadora_p.target(self.manzana.x, self.manzana.y)
+            self.computadora_e.target(self.manzana.x, self.manzana.y)
           
 
             if (keys[K_RIGHT]):
-                self.jugador_p.moveRight()
+                self.jugador_e.moveRight()
                 
             if (keys[K_LEFT]):
-                self.jugador_p.moveLeft()
+                self.jugador_e.moveLeft()
                 
             if (keys[K_UP]):
-                self.jugador_p.moveUp()
+                self.jugador_e.moveUp()
                 
             if (keys[K_DOWN]):
-                self.jugador_p.moveDown()
+                self.jugador_e.moveDown()
                 
             if (keys[K_ESCAPE]):
                 self._running = False
