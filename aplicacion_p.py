@@ -68,6 +68,7 @@ class aplicacion_p:
             if self.juego.isCollision(self.carnada.x,self.carnada.y,self.computadora_p.x[i], self.computadora_p.y[i]):
                 self.carnada.x = randint(2,14) * 44
                 self.carnada.y = randint(2,14) * 44
+
                 #self.computadora_p.longitud = self.computadora_p.longitud + 1
         # for i in range(0,self.computadora_p.longitud):
         #     if self.juego.isCollision2(self.carnada.x,self.carnada.y,self.manzana.x,self.manzana.y,self.computadora_p.x[i], self.computadora_p.y[i]):
@@ -76,8 +77,13 @@ class aplicacion_p:
         #         self.manzana.x = randint(2,14) * 44
         #         self.manzana.y = randint(2,14) * 44
 
-#self.computadora_p.longitud = self.computadora_p.longitud + 1   
-                  
+        for i in range(2,self.jugador_p.longitud):
+            if self.juego.isCollision2(self.jugador_p.x[0],self.jugador_p.y[0],self.computadora_p.x[i], self.computadora_p.y[i],44):
+                self.jugador_p.longitud = self.jugador_p.longitud - 1
+                
+        for i in range(2,self.computadora_p.longitud):
+            if self.juego.isCollision2(self.computadora_p.x[0],self.computadora_p.y[0],self.jugador_p.x[i], self.jugador_p.y[i],44):
+                self.computadora_p.longitud = self.computadora_p.longitud - 1                    
                 
  
         pygame.display.set_caption(" HUMANO SCORE: " + str(self.jugador_p.longitud-1) + "     " + " COMPUTADORA SCORE: " + str(self.computadora_p.longitud-1))

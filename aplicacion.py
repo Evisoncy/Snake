@@ -73,15 +73,22 @@ class aplicacion:
            #     print("x[0] (" + str(self.jugador_2.x[0]) + "," + str(self.jugador_2.y[0]) + ")")
             #    print("x[" + str(i) + "] (" + str(self.jugador_2.x[i]) + "," + str(self.jugador_2.y[i]) + ")")
              #   exit(0)
+        for i in range(2,self.jugador.longitud):
+            if self.juego.isCollision2(self.jugador.x[0],self.jugador.y[0],self.jugador_2.x[i], self.jugador_2.y[i],44):
+                self.jugador.longitud = self.jugador.longitud - 1
+                
+        for i in range(2,self.jugador_2.longitud):
+            if self.juego.isCollision2(self.jugador_2.x[0],self.jugador_2.y[0],self.jugador.x[i], self.jugador.y[i],44):
+                self.jugador_2.longitud = self.jugador_2.longitud - 1  
  
         pygame.display.set_caption(" JUGADOR 1 SCORE: " + str(self.jugador.longitud-1) + "     " + " JUGADOR 2 SCORE: " + str(self.jugador_2.longitud-1))
         
-        if self.jugador.longitud == 2:
+        if self.jugador.longitud == 16:
             pygame.display.set_caption("\n\n\n\n GANO EL JUGADOR 1" )
             time.sleep(10)
             pygame.quit()
         else:
-            if self.jugador_2.longitud == 2:
+            if self.jugador_2.longitud == 16:
                 pygame.display.set_caption("\n\n\n\n GANO EL JUGADOR 2" )
                 time.sleep(10)
                 pygame.quit()

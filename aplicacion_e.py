@@ -23,7 +23,7 @@ class aplicacion_e:
         self._image_surf = None
         self._manzana_surf = None
         self.juego = juego()
-        self.jugador_e = jugador_e(1) 
+        self.jugador_e = jugador_e(6) 
         self.manzana = manzana(14,14)
         self.computadora_e = computadora_e(1)
  
@@ -55,14 +55,20 @@ class aplicacion_e:
                 self.manzana.y = randint(2,14) * 44
                 self.jugador_e.longitud = self.jugador_e.longitud + 1
                 
-
         for i in range(0,self.computadora_e.longitud):
            if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_e.x[i], self.computadora_e.y[i]):
               self.manzana.x = randint(2,14) * 44
               self.manzana.y = randint(2,14) * 44
               self.computadora_e.longitud = self.computadora_e.longitud + 1   
                   
+        # ¿La serpiente choca ?
+        for i in range(2,self.jugador_e.longitud):
+            if self.juego.isCollision2(self.jugador_e.x[0],self.jugador_e.y[0],self.computadora_e.x[i], self.computadora_e.y[i],44):
+                self.jugador_e.longitud = self.jugador_e.longitud - 1
                 
+        for i in range(2,self.computadora_e.longitud):
+            if self.juego.isCollision2(self.computadora_e.x[0],self.computadora_e.y[0],self.jugador_e.x[i], self.jugador_e.y[i],44):
+                self.computadora_e.longitud = self.computadora_e.longitud - 1        
  
         pygame.display.set_caption(" HUMANO SCORE: " + str(self.jugador_e.longitud-1) + "     " + " COMPUTADORA SCORE: " + str(self.computadora_e.longitud-1))
         
@@ -77,20 +83,7 @@ class aplicacion_e:
                 pygame.quit()
 
 
-        # ¿La serpiente choca consigo misma?
-        #for i in range(2,self.jugador.longitud):
-         #   if self.juego.isCollision(self.jugador.x[0],self.jugador.y[0],self.jugador.x[i], self.jugador.y[i],44):
-          #      print("Perdiste! chocaste: ")
-            #    print("x[0] (" + str(self.jugador.x[0]) + "," + str(self.jugador.y[0]) + ")")
-           #     print("x[" + str(i) + "] (" + str(self.jugador.x[i]) + "," + str(self.jugador.y[i]) + ")")
-             #   exit(0)
-        #for i in range(2,self.computadora_e.longitud):
-        #    if self.juego.isCollision(self.computadora_e.x[0],self.computadora_e.y[0],self.computadora_e.x[i], self.computadora_e.y[i],40):
-         #       print("Perdiste! chocaste: ")
-          #      print("x[0] (" + str(self.computadora_e.x[0]) + "," + str(self.computadora_e.y[0]) + ")")
-           #     print("x[" + str(i) + "] (" + str(self.computadora_e.x[i]) + "," + str(self.computadora_e.y[i]) + ")")
-            #    exit(0)
- 
+     
         pass
         
         
@@ -133,7 +126,7 @@ class aplicacion_e:
  
             self.on_loop()
             self.on_render()
-            time.sleep(0.1)
+            time.sleep(0.3)
  
 
         self.on_cleanup()

@@ -58,7 +58,13 @@ class aplicacion_i:
                 self.manzana.y = randint(2,14) * 44
                 self.computadora_i.longitud = self.computadora_i.longitud + 1        
                 
- 
+        for i in range(2,self.jugador_i.longitud):
+            if self.juego.isCollision2(self.jugador_i.x[0],self.jugador_i.y[0],self.computadora_i.x[i], self.computadora_i.y[i],44):
+                self.jugador_i.longitud = self.jugador_i.longitud - 1
+                
+        for i in range(2,self.computadora_i.longitud):
+            if self.juego.isCollision2(self.computadora_i.x[0],self.computadora_i.y[0],self.jugador_i.x[i], self.jugador_i.y[i],44):
+                self.computadora_i.longitud = self.computadora_i.longitud - 1  
  
         # ¿La serpiente choca consigo misma?
        # for i in range(2,self.jugador_i.longitud):
