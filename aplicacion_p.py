@@ -4,6 +4,7 @@ from juego import *
 from jugador import *
 from manzana import *
 from computadora_p import *
+from pera import *
 from random import lognormvariate, randint
 import pygame
 import time
@@ -14,6 +15,8 @@ class aplicacion_p:
     windowHeight = 650
     jugador_p = 0
     manzana = 0
+    carnada = 0
+
     computadora_p = 0
  
     def __init__(self):
@@ -26,12 +29,12 @@ class aplicacion_p:
         self.jugador_p = jugador_p(1) 
         self.manzana = manzana(14,14)
         self.computadora_p = computadora_p(1)
+        self.carnada = carnada(5,10)
  
     def on_init(self):
         pygame.init()
         self._display_surf = pygame.display.set_mode((self.windowWidth,self.windowHeight), pygame.HWSURFACE)
  
-        #pygame.display.set_caption(str(self.jugador.longitud))
         self._running = True
         self._imageh_surf = pygame.image.load("human.jpg").convert()
         self._image_surf = pygame.image.load("block.jpg").convert()
@@ -55,12 +58,25 @@ class aplicacion_p:
                 self.manzana.y = randint(2,14) * 44
                 self.jugador_p.longitud = self.jugador_p.longitud + 1
                 
-
         for i in range(0,self.computadora_p.longitud):
-           if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_p.x[i], self.computadora_p.y[i]):
-              self.manzana.x = randint(2,14) * 44
-              self.manzana.y = randint(2,14) * 44
-              self.computadora_p.longitud = self.computadora_p.longitud + 1   
+            if self.juego.isCollision(self.manzana.x,self.manzana.y,self.computadora_p.x[i], self.computadora_p.y[i]):
+                self.manzana.x = randint(2,14) * 44
+                self.manzana.y = randint(2,14) * 44
+                self.computadora_p.longitud = self.computadora_p.longitud + 1
+        
+        for i in range(0,self.computadora_p.longitud):
+            if self.juego.isCollision(self.carnada.x,self.carnada.y,self.computadora_p.x[i], self.computadora_p.y[i]):
+                self.carnada.x = randint(2,14) * 44
+                self.carnada.y = randint(2,14) * 44
+                #self.computadora_p.longitud = self.computadora_p.longitud + 1
+        # for i in range(0,self.computadora_p.longitud):
+        #     if self.juego.isCollision2(self.carnada.x,self.carnada.y,self.manzana.x,self.manzana.y,self.computadora_p.x[i], self.computadora_p.y[i]):
+        #         self.carnada.x = randint(2,14) * 44
+        #         self.carnada.y = randint(2,14) * 44
+        #         self.manzana.x = randint(2,14) * 44
+        #         self.manzana.y = randint(2,14) * 44
+
+#self.computadora_p.longitud = self.computadora_p.longitud + 1   
                   
                 
  
@@ -113,8 +129,8 @@ class aplicacion_p:
             pygame.event.pump()
             keys = pygame.key.get_pressed() 
 
-            self.computadora_p.target(self.manzana.x, self.manzana.y)
-          
+            self.computadora_p.target(self.carnada.x, self.carnada.y)
+            #self.computadora_p.target(self.manzana.x, self.manzana.y)
 
             if (keys[K_RIGHT]):
                 self.jugador_p.moveRight()

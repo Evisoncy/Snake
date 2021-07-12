@@ -1,3 +1,4 @@
+from random import random
 import pygame
 from pygame.locals import *
 import time
@@ -10,8 +11,7 @@ class computadora_p:
     longitud = 1 
   
     def __init__(self, longitud):
-       self.direction = "Derecha"
-       self.changueDirectionTo = self.direction
+       
        self.longitud = longitud
        for i in range(0,2000):
            self.x.append(-100)
@@ -22,24 +22,61 @@ class computadora_p:
        self.y[0] = 4*44
   
     def target(self, dx, dy):
-        if self.x[0] > dx:
-            self.moveLeft()
-    
         if self.x[0] < dx:
             self.moveRight()
-    
-        if self.x[0] == dx:
-            if self.y[0] < dy:
+            if self.y[0] > dy:
                 self.moveDown()
-    
+
+        if self.x[0] > dx:
+            self.moveLeft()
             if self.y[0] > dy:
                 self.moveUp()
 
+        if self.x[0] == dx: 
+            if self.y[0] > dy:
+             self.moveDown()
+
+        if self.x[0] == dx :
+            if self.y[0] < dy:
+                self.moveUp()
+
+        if self.x[0] < dx:
+            if self.y[0] == dy:
+                self.moveRight()
+
+        if self.x[0] > dx :
+            if self.y[0] == dy:
+             self.moveLeft()
+
+        if self.x[0] < dx:
+            self.moveRight()
+            if self.y[0] < dy:
+                self.moveUp()
+
+        if self.x[0] > dx:
+            self.moveLeft()
+            if self.y[0] > dy:
+            
+                self.moveDown()
+
+        if self.x[0] > dx:
+            
+             self.moveLeft()
+    
+        if self.x[0] < dx:
+             
+             self.moveRight()
+    
+        if self.x[0] == dx:
+             if self.y[0] < dy:
+                 self.moveDown()
+    
+             if self.y[0] > dy:
+                 self.moveUp()
+        
+        
 
     def update(self):
- 
-       
- 
         # carga posición previa
         for i in range(self.longitud-1,0,-1):
             self.x[i] = self.x[i-1]
@@ -55,9 +92,7 @@ class computadora_p:
         if self.direccion == 3:
             self.y[0] = self.y[0] + self.pasos
  
-            
-           # time.sleep(100.0 / 500.0)
- 
+    
  
     def moveRight(self):
         self.direccion = 0

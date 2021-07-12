@@ -53,7 +53,6 @@ class computadora_e:
             self.y[0] = self.y[0] + self.pasos
  
             
-           # time.sleep(100.0 / 500.0)
  
  
     def moveRight(self):
