@@ -46,6 +46,9 @@ class jugador_2:
     def moveUp(self):
         self.direccion = 2
  
+
+
+ 
     def moveDown(self):
         self.direccion = 3 
  
