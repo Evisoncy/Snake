@@ -41,14 +41,19 @@ class jugador_2:
         self.direccion = 0
  
     def moveLeft(self):
-        self.direccion = 1
+        self.direccion = 
+        
+
+
+
+        
  
     def moveUp(self):
         self.direccion = 2
  
 
 
- 
+
     def moveDown(self):
         self.direccion = 3 
  
